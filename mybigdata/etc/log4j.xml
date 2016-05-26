@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<!-- @version $Id$ -->
+<!-- - Log4j配置文件。 -->
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+  <!-- ===================================================================== -->
+  <!-- Appenders -->
+  <!-- ===================================================================== -->
+  <!-- 默认 -->
+  <appender name="LOGFILE" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="file" value="../logs/debug/bigdata.log" />
+    <param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />  
+    <param name="append" value="true" />
+    <param name="threshold" value="debug" />
+    <param name="encoding" value="UTF-8" />
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%t] (%C.%M:%L) %x - %m%n" />
+    </layout>
+  </appender>
+  <!-- 汇总错误 -->
+  <appender name="ErrorAppender" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="datePattern" value="'.'yyyy-MM-dd'.log'" /> 
+    <param name="file" value="../logs/error/bigdataError.log" />
+    <param name="encoding" value="UTF-8" />
+    <param name="threshold" value="error" />
+    <param name="ImmediateFlush" value="true"></param>  
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%t] (%C.%M:%L) %x - %m%n" />
+    </layout>
+  </appender>
+  
+  <!-- [公共Appender] 控制台STDOUT -->
+  <appender name="console" class="org.apache.log4j.ConsoleAppender">
+    <param name="encoding" value="UTF-8" />
+    <param name="target" value="debug" />
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}] %m%n" />
+    </layout>
+  </appender>
+  <!-- [公共Appender] 控制台STDERR -->
+  <appender name="STDERR-APPENDER" class="org.apache.log4j.ConsoleAppender">
+    <param name="encoding" value="UTF-8" />
+    <param name="target" value="System.err" />
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}] %m%n" />
+    </layout>
+  </appender>
+
+
+  
+  <!-- ===================================================================== -->
+  <!-- Loggers -->
+  <!-- ===================================================================== -->
+  <!-- ===== [公共Logger] ===== -->
+  <!-- [公共Logger] 控制台STDOUT - STDOUT -->
+  <logger name="STDOUT" additivity="false">
+    <level value="INFO" />
+    <appender-ref ref="console" />
+  </logger>
+  <!-- [公共Logger] 控制台STDERR - STDERR -->
+  <logger name="STDERR" additivity="false">
+    <level value="ERROR" />
+    <appender-ref ref="STDERR-APPENDER" />
+  </logger>
+
+  <!-- ================ -->
+   <!-- Limit categories -->
+   <!-- ================ -->
+
+  <category name="com.mchange.v2">
+        <priority value="ERROR" />
+    </category>
+
+    <category name="httpclient">
+        <priority value="ERROR" />
+    </category>
+
+    <category name="org.apache.log4j.jmx">
+        <priority value="ERROR" />
+    </category>
+
+    <logger name="net.sf.ehcache">
+        <level value="ERROR" />
+    </logger>
+
+    <!-- Suppress success logging from InteractiveAuthenticationSuccessEvent -->
+    <logger name="org.springframework.security">
+        <level value="ERROR" />
+    </logger>
+
+    <logger name="org.apache">
+        <level value="WARN" />
+    </logger>
+
+    <logger name="org.apache.velocity">
+        <level value="FATAL" />
+    </logger>
+
+    <!-- Suppress invalid warning messages from JSF -->
+    <logger name="org.apache.myfaces.shared_impl.renderkit.html">
+        <level value="ERROR" />
+    </logger>
+
+    <logger name="org.dbunit">
+        <level value="WARN" />
+    </logger>
+
+    <logger name="org.hibernate">
+        <level value="WARN" />
+    </logger>
+
+    <logger name="org.hibernate.SQL">
+        <level value="ERROR" />
+    </logger>
+
+    <logger name="org.springframework">
+        <level value="WARN" />
+    </logger>
+
+    <category name="com.jianfeitech.bigdata.etl">
+        <priority value="INFO" />
+    </category>
+
+    <category name="org.appdot">
+        <priority value="DEBUG" />
+    </category>
+
+<!--    <logger name="com.jianfeitech.flyairport.backend.service.impl.flight.task.FlightDynamicTaskManager">
+        <level value="debug"/>
+        <appender-ref ref="FlightDynamicTaskManager" />
+    </logger> -->
+   
+  <!-- ===================================================================== -->
+  <!-- Root logger -->
+  <!-- ===================================================================== -->
+  <root>
+    <appender-ref ref="LOGFILE" />
+    <!--  appender-ref ref="STDOUT-APPENDER" -->
+    <appender-ref ref="ErrorAppender" />
+    <appender-ref ref="LOGFILE" />
+    <appender-ref ref="console" />
+  </root>
+</log4j:configuration>

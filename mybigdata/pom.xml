@@ -1,0 +1,238 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		<modelVersion>4.0.0</modelVersion>
+		<groupId>com.gxlx</groupId>
+		<artifactId>mybigdata</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<!--项目产生的构件类型，例如jar、war、ear、pom。插件可以创建他们自己的构件类型，所以前面列的不是全部构件类型 -->
+		<packaging>jar</packaging>
+		<!--项目的名称, Maven产生的文档用 -->
+		<name>banseon-maven</name>
+		<!--项目主页的URL, Maven产生的文档用 -->
+		<url>http://www.baidu.com/banseon</url>
+		<!-- 项目的详细描述, Maven 产生的文档用。 当这个元素能够用HTML格式描述时（例如，CDATA中的文本会被解析器忽略，就可以包含HTML标 签）， 不鼓励使用纯文本描述。如果你需要修改产生的web站点的索引页面，你应该修改你自己的索引页文件，而不是调整这里的文档。 -->
+		<description>A maven project to study maven.</description>
+
+ 
+
+		<!-- 依赖 -->
+		<dependencies>
+		<dependency>
+    <groupId>jdk.tools</groupId>
+    <artifactId>jdk.tools</artifactId>
+    <version>1.7</version>
+</dependency>
+		
+		 <!-- slf4j-log4j?? -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>1.7.12</version>
+      </dependency>
+		
+		
+		 
+		
+				<!-- storm -->
+				<dependency>
+						<groupId>org.apache.storm</groupId>
+						<artifactId>storm-core</artifactId>
+						<version>0.10.0-beta</version>
+						<exclusions>
+								<exclusion>
+										<groupId>org.eclipse.jetty.orbit</groupId>
+										<artifactId>javax.servlet</artifactId>
+								</exclusion>
+								<exclusion>
+										<groupId>org.slf4j</groupId>
+										<artifactId>log4j-over-slf4j</artifactId>
+								</exclusion>
+						</exclusions>
+				</dependency>
+
+				<dependency>
+						<groupId>org.apache.storm</groupId>
+						<artifactId>storm-kafka</artifactId>
+						<version>0.10.0-beta1</version>
+				</dependency>
+
+
+				<!-- spark-stream -->
+
+				<dependency>
+						<groupId>org.apache.spark</groupId>
+						<artifactId>spark-streaming_2.10</artifactId>
+						<version>1.5.2</version>
+						<exclusions>
+								<exclusion>
+										<groupId>org.apache.spark</groupId>
+										<artifactId>spark-core_2.10</artifactId>
+								</exclusion>
+						</exclusions>
+				</dependency>
+				<dependency>
+						<groupId>org.apache.spark</groupId>
+						<artifactId>spark-streaming-kafka_2.10</artifactId>
+						<version>1.5.2</version>
+				</dependency>
+
+
+
+				<!-- spark -->
+				<dependency>
+						<groupId>org.apache.hbase</groupId>
+						<artifactId>hbase-server</artifactId>
+						<version>1.1.2</version>
+				</dependency>
+
+				<dependency>
+						<groupId>org.apache.spark</groupId>
+						<artifactId>spark-core_2.11</artifactId>
+						<version>1.5.2</version>
+						<exclusions>
+								<exclusion>
+										<groupId>org.eclipse.jetty.orbit</groupId>
+										<artifactId>javax.servlet</artifactId>
+								</exclusion>
+						</exclusions>
+				</dependency>
+
+				<dependency>
+						<groupId>org.scala-lang</groupId>
+						<artifactId>scala-library</artifactId>
+						<version>2.11.0</version>
+				</dependency>
+
+
+				<!-- spark run time -->
+				<dependency>
+						<groupId>spark.assembly</groupId>
+						<artifactId>hadoopassembly</artifactId>
+						<version>1.5.1</version>
+				</dependency>
+
+
+
+				<!-- zookeeper -->
+
+				<dependency>
+						<groupId>org.apache.zookeeper</groupId>
+						<artifactId>zookeeper</artifactId>
+						<version>3.5.1-alpha</version>
+				</dependency>
+
+				<!-- kafka -->
+				<dependency>
+						<groupId>org.apache.kafka</groupId>
+						<artifactId>kafka_2.10</artifactId>
+						<version>0.8.2.2</version>
+				</dependency>
+
+
+				<!-- flume -->
+				<dependency>
+						<groupId>org.apache.flume</groupId>
+						<artifactId>flume-ng-sdk</artifactId>
+						<version>1.6.0</version>
+				</dependency>
+
+
+
+				<!-- hbase -->
+
+				<dependency>
+						<groupId>org.apache.hbase</groupId>
+						<artifactId>hbase-client</artifactId>
+						<version>1.1.2</version>
+				</dependency>
+
+				<!-- hadoop -->
+				<dependency>
+						<groupId>org.apache.hadoop</groupId>
+						<artifactId>hadoop-client</artifactId>
+						<version>2.6.0</version>
+				</dependency>
+
+				<!-- <dependency> <groupId>commons-cli</groupId> <artifactId>commons-cli</artifactId> <version>1.2</version> </dependency> -->
+
+		</dependencies>
+
+		<!-- 编译 -->
+		<build>
+		 <pluginManagement>
+				<plugins>
+						<plugin>
+								<groupId>org.apache.maven.plugins</groupId>
+								<artifactId>maven-compiler-plugin</artifactId>
+								<version>3.2</version>
+								<configuration>
+										<source>1.8</source>
+										<target>1.8</target>
+								</configuration>
+						</plugin>
+
+						<!-- 资源版本 -->
+						<plugin>
+								<groupId>org.apache.maven.plugins</groupId>
+								<artifactId>maven-resources-plugin</artifactId>
+								<version>2.6</version>
+								<configuration>
+										<encoding>UTF-8</encoding>
+								</configuration>
+						</plugin>
+
+						<!-- mvn clean package -DskipTests=true appassembler:assemble -Pprod -->
+						<!-- 可运行脚本 -->
+						<plugin>
+								<groupId>org.codehaus.mojo</groupId>
+								<artifactId>appassembler-maven-plugin</artifactId>
+								<version>1.1.1</version>
+								<configuration>
+										<binFileExtensions>
+												<unix>.sh</unix>
+										</binFileExtensions>
+										<platforms>
+												<platform>windows</platform>
+												<platform>unix</platform>
+										</platforms>
+										<programs>
+												<program>
+														<mainClass>cn.gxlx.client.Client</mainClass>
+														<name>dtreeClient</name>
+												</program>
+										</programs>
+										<includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+										<configurationDirectory>etc</configurationDirectory>
+										<repositoryLayout>flat</repositoryLayout>
+										<repositoryName>rep</repositoryName>
+										<assembleDirectory>${project.build.directory}/dtree-client</assembleDirectory>
+								</configuration>
+						</plugin>
+
+
+						<plugin>
+								<groupId>org.apache.maven.plugins</groupId>
+								<artifactId>maven-antrun-plugin</artifactId>
+								<version>1.7</version>
+								<configuration>
+										<target>
+												<copy todir="target/dtree-client/etc">
+														<fileset dir="etc" />
+												</copy>
+												<mkdir dir="target/dtree-client/logs" />
+										</target>
+								</configuration>
+								<executions>
+										<execution>
+												<id>config</id>
+												<phase>process-resources</phase>
+												<goals>
+														<goal>run</goal>
+												</goals>
+										</execution>
+								</executions>
+						</plugin>
+				</plugins> 
+				 </pluginManagement>
+		</build>
+</project>
