@@ -18,7 +18,7 @@ import cn.gxlx.computer.spark.mapreduce.LocalSparkService;
 
 /**
  * @Description: Cli
- * @author gordon
+ * @author gordonggggggggggggggg
  * @date 2014-7-31 下午3:31:16
  */
 public class Client {
